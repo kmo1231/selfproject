@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.miok.adminboard.dao.BoardGroupDAO;
 import com.miok.adminboard.vo.BoardGroupVO;
 
-/*@Service*/
+@Service
 public class BoardGroupSvcImp implements BoardGroupSvc{
 	@Autowired
 	BoardGroupDAO boardGroupDAO;

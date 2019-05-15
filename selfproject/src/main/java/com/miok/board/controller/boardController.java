@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,54 +18,83 @@ import com.miok.adminboard.service.BoardGroupSvc;
 import com.miok.adminboard.vo.BoardGroupVO;
 import com.miok.board.service.BoardSvc;
 import com.miok.board.vo.BoardReplyVO;
+import com.miok.board.vo.BoardSearchVO;
 import com.miok.board.vo.BoardVO;
 import com.miok.common.FileUtil;
 import com.miok.common.FileVO;
-import com.miok.common.SearchVO;
+import com.miok.etc.service.EtcSvc;
 
 
-/*@Controller*/
+
+@Controller
 public class boardController {
 
 	@Autowired
-	private BoardSvc boardService;
+	private BoardSvc boardSvc;
+	
 	@Autowired
 	private BoardGroupSvc boardGroupSvc;
+	
+	@Autowired
+	private EtcSvc etcSvc;
+	
+	static final Logger LOGGER = LoggerFactory.getLogger(boardController.class);
 
 	// 리스트
 	@RequestMapping(value = "/boardList")
-	public String boardList(SearchVO searchVO, Model model) {
-		
-		BoardGroupVO bgInfo = boardGroupSvc.selectBoardGroupOneUsed(searchVO.getBgno());
-		if(bgInfo == null) {
-			return "/boardgroup/BoardGroupFail";
+	public String boardList(HttpServletRequest request, BoardSearchVO boardSearchVO, Model model) {
+		// 다국어지원을 위한 설정
+		String globalkeyword = request.getParameter("globalkeyword");
+		if(globalkeyword != null || !"".equals(globalkeyword)) {
+			boardSearchVO.setSearchKeyword(globalkeyword);
 		}
 		
-		if(searchVO.getBgno() == null) {
-			searchVO.setBgno("1");
+		// 사용자 정보 가져오기
+		String userno = (String)request.getSession().getAttribute("userno");
+		
+		// 사용자 알림 개수 저장
+		Integer alertcount = etcSvc.selectAlertCount(userno);
+		model.addAttribute("alertcount", alertcount);
+		
+		// 생성되지 않은 게시판일 경우
+		if(boardSearchVO.getBgno() != null && !"".equals(boardSearchVO.getBgno())) {
+			BoardGroupVO bgInfo = boardSvc.selectBoardGroupOne4Used(boardSearchVO.getBgno());
+			if(bgInfo == null) {
+				return "board/BoardGroupFail";
+			}
+			model.addAttribute("bgInfo", bgInfo);
 		}
 		
-		searchVO.pageCalculate(boardService.selectBoardCount(searchVO));
 		
-		List<BoardVO> boardList = boardService.selectBoardList(searchVO);
-
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("searchVO", searchVO);
-		model.addAttribute("bgInfo", bgInfo);
+		List<BoardVO> noticelist = boardSvc.selectNoticeList(boardSearchVO);
 		
-		return "/board/boardList";
+		// 페이지계산용
+		boardSearchVO.pageCalculate(boardSvc.selectBoardCount(boardSearchVO));
+		
+		List<BoardVO> listview = boardSvc.selectBoardList(boardSearchVO);
+		
+		model.addAttribute("listview", listview);
+		model.addAttribute("searchVO", boardSearchVO);
+		model.addAttribute("noticelist", noticelist);
+		
+		// 전체리스트 출력?
+		if(boardSearchVO.getBgno() == null || "".equals(boardSearchVO.getBgno())) {
+			return "board/BoardListAll";
+		}
+		
+		return "board/boardList";
 	}
 
 	// 글쓰기
-	@RequestMapping(value = "/boardForm")
+	/*@RequestMapping(value = "/boardForm")
 	public String boardForm(HttpServletRequest request, Model model) {
 		String bgno = request.getParameter("bgno");
 		String brdno = request.getParameter("brdno");
 		
 		//수정일 경우
 		if(brdno != null) {
-			BoardVO boardInfo = boardService.selectBoardOne(brdno);
-			List<FileVO> filelist = boardService.selectBoardFileList(brdno);
+			BoardVO boardInfo = boardSvc.selectBoardOne(brdno);
+			List<FileVO> filelist = boardSvc.selectBoardFileList(brdno);
 			bgno = boardInfo.getBgno();
 			
 			model.addAttribute("boardInfo", boardInfo);
@@ -79,7 +110,7 @@ public class boardController {
 		model.addAttribute("bgInfo", bgInfo);
 		
 		return "/board/boardForm";
-	}
+	}*/
 	
 	// 글쓰기 저장
 	@RequestMapping(value = "/boardSave")
@@ -89,21 +120,21 @@ public class boardController {
    		FileUtil fs = new FileUtil();
    		List<FileVO> filelist = fs.saveAllFiles(boardInfo.getUploadfile());
 		
-		boardService.insertBoard(boardInfo, filelist, fileno);
+		boardSvc.insertBoard(boardInfo, filelist, fileno);
 
    		return "redirect:/boardList?bgno="+boardInfo.getBgno();
     }
 	
 	// 글읽기
-	@RequestMapping(value = "/boardView")
+	/*@RequestMapping(value = "/boardView")
 	public String boardView(HttpServletRequest request, Model model) {
 		String brdno = request.getParameter("brdno");
 		
-		boardService.updateBoardHit(brdno);
-		BoardVO boardInfo = boardService.selectBoardOne(brdno);
-		List<FileVO> filelist = boardService.selectBoardFileList(brdno);
+		boardSvc.updateBoardHit(brdno);
+		BoardVO boardInfo = boardSvc.selectBoardOne(brdno);
+		List<FileVO> filelist = boardSvc.selectBoardFileList(brdno);
 		
-		List<BoardReplyVO> replylist = boardService.selectBoardReplyList(brdno);
+		List<BoardReplyVO> replylist = boardSvc.selectBoardReplyList(brdno);
 		
 		BoardGroupVO bgInfo = boardGroupSvc.selectBoardGroupOneUsed(boardInfo.getBgno());
 		if(bgInfo == null) {
@@ -116,7 +147,7 @@ public class boardController {
 		model.addAttribute("bgInfo", bgInfo);
 		
 		return "/board/boardView";
-	}
+	}*/
 
 	// 글삭제
 	@RequestMapping(value = "/boardDelete")
@@ -124,7 +155,7 @@ public class boardController {
 		String brdno = request.getParameter("brdno");
 		String bgno = request.getParameter("bgno");
 		
-		boardService.deleteBoardOne(brdno);
+		boardSvc.deleteBoardOne(brdno);
 
 		return "redirect:/boardList?bgno="+bgno;
 	}
@@ -132,7 +163,7 @@ public class boardController {
 	// 댓글저장
 	@RequestMapping(value = "/boardReplySave")
 	public String boardReplySave(HttpServletRequest request, BoardReplyVO replyInfo) {
-		boardService.insertBoardReply(replyInfo);
+		boardSvc.insertBoardReply(replyInfo);
 		
 		return "redirect:/boardView?brdno="+replyInfo.getBrdno();
 	}
@@ -141,7 +172,7 @@ public class boardController {
 	@RequestMapping(value = "/boardReplySaveAjaxJSP")
     public String board7ReplySaveAjaxJSP(BoardReplyVO ReplyInfo, Model model) {
         
-        boardService.insertBoardReply(ReplyInfo);
+        boardSvc.insertBoardReply(ReplyInfo);
 
         model.addAttribute("replyInfo", ReplyInfo);
         
@@ -151,7 +182,7 @@ public class boardController {
 	// 댓글삭제
 	@RequestMapping(value = "/boardReplyDelete")
 	public String boardReplyDelete(BoardReplyVO replyInfo) {
-		if(!boardService.deleteBoardReply(replyInfo.getReno())) {
+		if(!boardSvc.deleteBoardReply(replyInfo.getReno())) {
 			return "BoardFailure";
 		}
 		
@@ -165,7 +196,7 @@ public class boardController {
 		response.setContentType("application/json:charset=UTF-8");
 		
 		try {
-			if(!boardService.deleteBoardReply(replyInfo.getReno())) {
+			if(!boardSvc.deleteBoardReply(replyInfo.getReno())) {
 				response.getWriter().print(mapper.writeValueAsString("Fail"));
 			} else {
 				response.getWriter().print(mapper.writeValueAsString("OK"));
