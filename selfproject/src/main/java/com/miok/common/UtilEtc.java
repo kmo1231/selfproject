@@ -8,12 +8,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.miok.board.service.BoardService;
+import com.miok.board.service.BoardSvc;
 
 
 
 public class UtilEtc {
-    static final Logger LOGGER = LoggerFactory.getLogger(BoardService.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(BoardSvc.class);
 
     /**
      * JSON (String)을 문자열로 변환하여 클라이언트에 전송.

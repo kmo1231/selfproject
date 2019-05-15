@@ -1,4 +1,4 @@
-package com.miok.admin.board.controller;
+package com.miok.adminboard.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.miok.admin.board.service.BoardGroupSvc;
-import com.miok.admin.board.vo.BoardGroupVO;
+import com.miok.adminboard.service.BoardGroupSvc;
+import com.miok.adminboard.vo.BoardGroupVO;
 import com.miok.common.TreeMaker;
 
 /*@Controller*/

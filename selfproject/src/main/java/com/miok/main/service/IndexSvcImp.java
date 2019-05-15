@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.miok.board.vo.BoardReplyVO;
+import com.miok.board.vo.BoardVO;
 import com.miok.main.dao.IndexDAO;
 
 @Service
@@ -13,17 +15,17 @@ public class IndexSvcImp implements IndexSvc{
 	private IndexDAO indexDao;
 	
 	@Override
-	public List<?> selectRecentNews() {
+	public List<BoardVO> selectRecentNews() {
 		return indexDao.selectRecentNews();
 	}
 
 	@Override
-	public List<?> selectTimeLine() {
+	public List<BoardReplyVO> selectTimeLine() {
 		return indexDao.selectTimeLine();
 	}
 
 	@Override
-	public List<?> selectNoticeListTop5() {
+	public List<BoardVO> selectNoticeListTop5() {
 		return indexDao.selectNoticeListTop5();
 	}
 

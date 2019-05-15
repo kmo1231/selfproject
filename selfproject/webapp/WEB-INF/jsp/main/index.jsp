@@ -115,16 +115,16 @@ function fn_moveDate(date){
                             <i class="fa fa-volume-up fa-fw"></i> <s:message code="common.notice"/>
                         </div>
                         <div class="panel-body maxHeight400">
-                            <%-- <c:forEach var="noticeList" items="${noticeList}" varStatus="status">    
+                            <c:forEach var="noticeList" items="${noticeList}" varStatus="status">    
                                 <c:url var="link" value="boardRead">
                                     <c:param name="brdno" value="${noticeList.brdno}" />
-                                </c:url> --%>    
+                                </c:url>    
                                 <a href="${link}">
                                 <div class="listBody listTitle">
-                                    noticeList.brdtitle<%-- <c:out value="${noticeList.brdtitle}"/> --%>
-                                </div>    
+                                    <c:out value="${noticeList.brdtitle}"/>
+                                </div>
                                 </a>
-                            <%-- </c:forEach> --%>
+                            </c:forEach>
                         </div>
                     </div>
 
@@ -135,59 +135,59 @@ function fn_moveDate(date){
                         </div>
                         <div class="panel-body maxHeight400">
                             <ul class="chat">
-                                <%-- <c:forEach var="listtime" items="${listtime}" varStatus="status">
+                                <c:forEach var="listtime" items="${listtime}" varStatus="status">
                                     <c:choose>
-                                        <c:when test="${status.index % 2 eq 0}"> --%>
+                                        <c:when test="${status.index % 2 eq 0}">
                                             <li class="left clearfix">
-                                                    <%-- <c:choose>
+                                                    <c:choose>
                                                     <c:when test="${listtime.photo==null}">
-                                                        <span class="chat-img pull-left img-circle"> --%>
+                                                        <span class="chat-img pull-left img-circle">
                                                             <i class="glyphicon glyphicon-user noPhoto"></i>
-                                                        <%-- </span>
+                                                        </span>
                                                     </c:when>
-                                                    <c:otherwise> --%>
-                                                        <p>image부분</p><%-- <img src="fileDownload?downname=<c:out value="${listtime.photo}"/>" title="<c:out value="${listtime.rewriter}"/>" class="chat-img pull-left img-circle"/> --%>
-                                                    <%-- </c:otherwise>
-                                                    </c:choose> --%>                                                
+                                                    <c:otherwise>
+                                                        <img src="fileDownload?downname=<c:out value="${listtime.photo}"/>" title="<c:out value="${listtime.rewriter}"/>" class="chat-img pull-left img-circle"/>
+                                                    </c:otherwise>
+                                                    </c:choose>                                                
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
-                                                        <strong class="primary-font">listtime.rewriter<%-- <c:out value="${listtime.rewriter}"/> --%></strong>
+                                                        <strong class="primary-font"> <c:out value="${listtime.rewriter}"/></strong>
                                                         <small class="pull-right text-muted">
-                                                            <i class="fa fa-clock-o fa-fw"></i>listtime.redate<%--  <c:out value="${listtime.redate}"/> --%>
+                                                            <i class="fa fa-clock-o fa-fw"></i>  <c:out value="${listtime.redate}"/>
                                                         </small>
                                                     </div>
                                                     <p>
-                                                        <a href="boardRead?brdno=<c:out value="${listtime.brdno}"/>">게시물[listtime.rememo]에 댓글이 추가되었습니다.</a>    
+                                                        <a href="boardRead?brdno=<c:out value="${listtime.brdno}"/>">게시물[${listtime.rememo}]에 댓글이 추가되었습니다.</a>    
                                                     </p>
                                                 </div>
                                             </li>                                    
-                                        <%-- </c:when>
-                                        <c:otherwise> --%>
+                                        </c:when>
+                                        <c:otherwise>
                                             <li class="right clearfix">
-                                                <%-- <c:choose>
-                                                <c:when test="${listtime.photo==null}"> --%>
+                                                <c:choose>
+                                                <c:when test="${listtime.photo==null}">
                                                     <span class="chat-img pull-right img-circle">
                                                         <i class="glyphicon glyphicon-user noPhoto"></i>
                                                     </span>
-                                                <%-- </c:when>
-                                                <c:otherwise> --%>
-                                                    <p>image part</p><%-- <img src="fileDownload?downname=<c:out value="${listtime.photo}"/>" title="<c:out value="${listtime.rewriter}"/>" class="chat-img pull-right img-circle"/> --%>
-                                                <%-- </c:otherwise>
-                                                </c:choose> --%>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <p>image part</p><img src="fileDownload?downname=<c:out value="${listtime.photo}"/>" title="<c:out value="${listtime.rewriter}"/>" class="chat-img pull-right img-circle"/>
+                                                </c:otherwise>
+                                                </c:choose>
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
                                                         <small class=" text-muted">
-                                                            <i class="fa fa-clock-o fa-fw"></i> listtime.redate<%-- <c:out value="${listtime.redate}"/> --%></small>
-                                                        <strong class="pull-right primary-font">listtime.rewriter<%-- <c:out value="${listtime.rewriter}"/> --%></strong>
+                                                            <i class="fa fa-clock-o fa-fw"></i> <c:out value="${listtime.redate}"/></small>
+                                                        <strong class="pull-right primary-font"> <c:out value="${listtime.rewriter}"/></strong>
                                                     </div>
                                                     <p>
-                                                        <a href="boardRead?brdno=<c:out value="${listtime.brdno}"/>">게시물[listtime.rememo]에 댓글이 추가되었습니다.</a>    
+                                                        <a href="boardRead?brdno=<c:out value="${listtime.brdno}"/>">게시물[${listtime.rememo}]에 댓글이 추가되었습니다.</a>    
                                                     </p>
                                                 </div>
                                             </li>                                            
-                                        <%-- </c:otherwise>
+                                        </c:otherwise>
                                     </c:choose>
-                                </c:forEach> --%>
+                                </c:forEach>
                             </ul>    
                         </div>
                     </div>                    

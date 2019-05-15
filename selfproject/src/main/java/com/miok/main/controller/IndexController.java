@@ -11,8 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.miok.board.vo.BoardReplyVO;
+import com.miok.board.vo.BoardVO;
 import com.miok.common.DateVO;
 import com.miok.common.Util4calen;
+import com.miok.etc.service.EtcSvc;
 import com.miok.main.service.IndexSvc;
 
 @Controller
@@ -20,17 +23,31 @@ public class IndexController {
 
 	@Autowired
 	private IndexSvc indexSvc;
-	
+	@Autowired
+	private EtcSvc etcSvc;
+	 
 	@RequestMapping(value="/index")
 	public String index(HttpServletRequest request, Model model) {
+		//사용자정보
+//		String userno = (String)request.getSession().getAttribute("userno");
+		String userno = "2";
+		
 		//주간일정
 		Date today = Util4calen.getToday();
 		calCalen(today, model);
 		
-		//RecentNews
-		List<?> listview = indexSvc.selectRecentNews();
+		//네비게이션
+		Integer alertcount = etcSvc.selectAlertCount(userno);
+		model.addAttribute("alertcount", alertcount);
+		
+		//RecentNews, 공지사항, timeline
+		List<BoardVO> listview = indexSvc.selectRecentNews();
+		List<BoardVO> noticeList = indexSvc.selectNoticeListTop5();
+		List<BoardReplyVO> listtime = indexSvc.selectTimeLine();
 		
 		model.addAttribute("listview", listview);
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("listtime", listtime);
 		
 		return "main/index";
 	}

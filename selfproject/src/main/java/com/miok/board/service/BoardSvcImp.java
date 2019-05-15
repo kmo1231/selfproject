@@ -18,7 +18,7 @@ import com.miok.common.FileVO;
 import com.miok.common.SearchVO;
 
 /*@Service*/
-public class BoardServiceImp implements BoardService{
+public class BoardSvcImp implements BoardSvc{
 	@Autowired
 	private BoardDAO boardDAO;
 	@Autowired

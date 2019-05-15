@@ -1,12 +1,12 @@
-package com.miok.admin.board.service;
+package com.miok.adminboard.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.miok.admin.board.dao.BoardGroupDAO;
-import com.miok.admin.board.vo.BoardGroupVO;
+import com.miok.adminboard.dao.BoardGroupDAO;
+import com.miok.adminboard.vo.BoardGroupVO;
 
 /*@Service*/
 public class BoardGroupSvcImp implements BoardGroupSvc{

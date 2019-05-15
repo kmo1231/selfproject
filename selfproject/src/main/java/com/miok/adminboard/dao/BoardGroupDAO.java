@@ -1,10 +1,10 @@
-package com.miok.admin.board.dao;
+package com.miok.adminboard.dao;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.miok.admin.board.vo.BoardGroupVO;
+import com.miok.adminboard.vo.BoardGroupVO;
 
 /*@Repository*/
 public interface BoardGroupDAO {

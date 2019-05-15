@@ -1,4 +1,4 @@
-package com.miok.admin.board.vo;
+package com.miok.adminboard.vo;
 
 public class BoardGroupVO {
 

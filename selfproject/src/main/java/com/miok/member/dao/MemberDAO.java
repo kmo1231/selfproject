@@ -8,11 +8,11 @@ import com.miok.common.SearchVO;
 import com.miok.member.vo.LoginVO;
 import com.miok.member.vo.UserVO;
 
-/*@Repository*/
+@Repository
 public interface MemberDAO {
 	public Integer selectSearchMemberCount(SearchVO searchVO);
 	public List<?> selectSearchMemberList(SearchVO searchVO);
-	public UserVO selectMemberLogin(LoginVO loginVO);
+	public UserVO selectMember4Login(LoginVO loginVO);
 	public void insertLogin(String userno);
 	public void insertLogout(String userno);
 	

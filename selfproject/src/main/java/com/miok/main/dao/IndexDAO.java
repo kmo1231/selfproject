@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.miok.board.vo.BoardReplyVO;
 import com.miok.board.vo.BoardVO;
 
 @Repository
 public interface IndexDAO {
-	public List<?> selectRecentNews();
-	public List<?> selectTimeLine();
-	public List<?> selectNoticeListTop5();
+	public List<BoardVO> selectRecentNews();
+	public List<BoardReplyVO> selectTimeLine();
+	public List<BoardVO> selectNoticeListTop5();
 }

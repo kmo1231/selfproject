@@ -14,11 +14,11 @@
 
 	            <ul class="nav navbar-top-links navbar-right">
 	                <!-- /.dropdown -->
-                    <%-- <c:if test="${alertcount>0}"> --%>
+                    <c:if test="${alertcount>0}">
 		                <li class="dropdown">
 		                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="showAlertList()">
 		                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-		                        	<div class="msgAlert">alertcount<%-- <c:out value="${alertcount}"/> --%></div>
+		                        	<div class="msgAlert"><c:out value="${alertcount}"/></div>
 		                    </a>
 		                    <script>
 		                    	function showAlertList(){
@@ -38,14 +38,15 @@
 		                    </ul>
 		                    <!-- /.dropdown-alerts -->
 		                </li>
-                    <%-- </c:if> --%>
+                    </c:if>
+                    
 	                <!-- /.dropdown -->
 	                <li class="dropdown">
 	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu dropdown-user">
-	                        <li><a href="memberForm"><i class="fa fa-user fa-fw"></i> sessionScope.usernm<%-- <c:out value="${sessionScope.usernm}"/> --%></a></li>
+	                        <li><a href="memberForm"><i class="fa fa-user fa-fw"></i> <c:out value="${sessionScope.usernm}"/></a></li>
 	                        <li><a href="searchMember"><i class="fa fa-users fa-fw"></i> <s:message code="memu.users"/></a></li>
 	                        <li class="divider"></li>
 	                        <li><a href="memberLogout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -108,7 +109,7 @@
                                 </li>
 	                        </ul>                            
                         </li>
-                        <p>sessionScope.userrole == "A"</p><%-- <c:if test='${sessionScope.userrole == "A"}'> --%>
+                        <c:if test='${sessionScope.userrole == "A"}'>
 	                        <li>
 	                            <a href="#"><s:message code="memu.admin"/></a>
 	                        </li>
@@ -129,7 +130,7 @@
                              <li>
                                  <a href="adCodeList"><i class="fa fa-gear fa-fw"></i> <s:message code="memu.code"/></a>
                              </li>
-	                	<%-- </c:if> --%>	        
+	                	</c:if>	        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

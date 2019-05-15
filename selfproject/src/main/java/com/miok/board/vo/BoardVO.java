@@ -21,6 +21,7 @@ public class BoardVO {
     private String brdlike;
     private String brdlikechk;          // like button click check
     private String extfield1;           // etc
+    private String reno;				// etc
     
     /* 첨부파일 */
     private List<MultipartFile> uploadfile;
@@ -160,5 +161,14 @@ public class BoardVO {
     public void setExtfield1(String extfield1) {
         this.extfield1 = extfield1;
     }
+
+	public String getReno() {
+		return reno;
+	}
+
+	public void setReno(String reno) {
+		this.reno = reno;
+	}
+    
     
 }

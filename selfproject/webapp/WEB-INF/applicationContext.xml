@@ -59,7 +59,7 @@
     
     <!-- 지정된 베이스 패키지에서 DAO(Mapper)를 검색하여 등록 -->
 	<bean id="ppsOracleMapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-		p:basePackage="com.miok.main.dao" p:sqlSessionFactoryBeanName="sqlSession" />
+		p:basePackage="com.miok.**.dao" p:sqlSessionFactoryBeanName="sqlSession" />
 
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<!-- Encoding 설정 -->

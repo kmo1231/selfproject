@@ -10,7 +10,7 @@ import com.miok.member.dao.MemberDAO;
 import com.miok.member.vo.LoginVO;
 import com.miok.member.vo.UserVO;
 
-/*@Service*/
+@Service
 public class MemberSvcImp implements MemberSvc{
 
 	@Autowired
@@ -27,8 +27,8 @@ public class MemberSvcImp implements MemberSvc{
 	}
 
 	@Override
-	public UserVO selectMemberLogin(LoginVO loginVO) {
-		return memberDAO.selectMemberLogin(loginVO);
+	public UserVO selectMember4Login(LoginVO loginVO) {
+		return memberDAO.selectMember4Login(loginVO);
 	}
 
 	@Override

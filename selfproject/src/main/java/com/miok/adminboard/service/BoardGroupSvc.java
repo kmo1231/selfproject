@@ -1,8 +1,8 @@
-package com.miok.admin.board.service;
+package com.miok.adminboard.service;
 
 import java.util.List;
 
-import com.miok.admin.board.vo.BoardGroupVO;
+import com.miok.adminboard.vo.BoardGroupVO;
 
 public interface BoardGroupSvc {
 	public List<BoardGroupVO> selectBoardGroupList();

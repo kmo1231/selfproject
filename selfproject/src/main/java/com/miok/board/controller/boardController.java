@@ -12,9 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.miok.admin.board.service.BoardGroupSvc;
-import com.miok.admin.board.vo.BoardGroupVO;
-import com.miok.board.service.BoardService;
+import com.miok.adminboard.service.BoardGroupSvc;
+import com.miok.adminboard.vo.BoardGroupVO;
+import com.miok.board.service.BoardSvc;
 import com.miok.board.vo.BoardReplyVO;
 import com.miok.board.vo.BoardVO;
 import com.miok.common.FileUtil;
@@ -26,7 +26,7 @@ import com.miok.common.SearchVO;
 public class boardController {
 
 	@Autowired
-	private BoardService boardService;
+	private BoardSvc boardService;
 	@Autowired
 	private BoardGroupSvc boardGroupSvc;
 

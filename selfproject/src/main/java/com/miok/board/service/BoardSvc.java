@@ -7,7 +7,7 @@ import com.miok.board.vo.BoardVO;
 import com.miok.common.FileVO;
 import com.miok.common.SearchVO;
 
-public interface BoardService {
+public interface BoardSvc {
 	public List<BoardVO> selectBoardList(SearchVO searchVO);
 	public void insertBoard(BoardVO boardVO, List<FileVO> filelist, String[] fileno);
 	public BoardVO selectBoardOne(String brdno);
