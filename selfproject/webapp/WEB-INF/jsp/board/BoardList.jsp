@@ -32,7 +32,7 @@
     <script src="css/sb-admin/bootstrap.min.js"></script>
     <script src="css/sb-admin/metisMenu.min.js"></script>
     <script src="css/sb-admin/sb-admin-2.js"></script>
-	<script src="js/selfproject.js"></script>    
+	<script src="js/selfproject.js"></script>
 <script>
 
 

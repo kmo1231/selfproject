@@ -1,9 +1,9 @@
 package com.miok.member.vo;
 
 public class LoginVO {
-    private String userid;		//사용자id
-    private String userpw;		//사용자비밀번호
-    private String remember;	//
+    private String userid;		// 사용자id
+    private String userpw;		// 사용자비밀번호
+    private String remember;	// 사용자 id 쿠키에 저장
     
     public String getUserid() {
         return userid;

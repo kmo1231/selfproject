@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.miok.adminboard.vo.BoardGroupVO;
 
-/*@Repository*/
+@Repository
 public interface BoardGroupDAO {
 	public List<BoardGroupVO> selectBoardGroupList();
 	public void insertBoardGroup(BoardGroupVO bgVO);

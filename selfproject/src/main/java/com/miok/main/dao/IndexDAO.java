@@ -10,6 +10,8 @@ import com.miok.board.vo.BoardVO;
 @Repository
 public interface IndexDAO {
 	public List<BoardVO> selectRecentNews();
+
 	public List<BoardReplyVO> selectTimeLine();
+
 	public List<BoardVO> selectNoticeListTop5();
 }

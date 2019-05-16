@@ -18,9 +18,7 @@ public class AlertMsgController {
 	@Autowired
 	private EtcSvc etcSvc;
 	
-	/**
-	 * alert list 전체.
-	 */
+	// alert list 전체
 	@RequestMapping(value = "/alertList")
 	public String alertList(HttpServletRequest request, Model model) {
 		String userno = (String)request.getSession().getAttribute("userno");
@@ -31,16 +29,12 @@ public class AlertMsgController {
 		return "etc/alertList";
 	}
 	
-	/**
-	 * alert list top 5.
-	 */
+	// alert list top 5
 	@RequestMapping(value = "/alertList4Ajax")
 	public String alertList4Ajax(HttpServletRequest request, Model model) {
-//		String userno = (String)request.getSession().getAttribute("userno");
-		String userno = "2";
+		String userno = (String)request.getSession().getAttribute("userno");
 		
 		List<BoardVO> listview = etcSvc.selectAlertList4Ajax(userno);
-		
 		model.addAttribute("listview", listview);
 		
 		return "etc/alertList4Ajax";

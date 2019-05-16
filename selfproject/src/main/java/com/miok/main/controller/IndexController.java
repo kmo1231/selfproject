@@ -25,22 +25,23 @@ public class IndexController {
 	private IndexSvc indexSvc;
 	@Autowired
 	private EtcSvc etcSvc;
-	 
+	
+	// 메인화면
 	@RequestMapping(value="/index")
 	public String index(HttpServletRequest request, Model model) {
-		//사용자정보
-//		String userno = (String)request.getSession().getAttribute("userno");
-		String userno = "2";
+		// 사용자정보
+		String userno = (String)request.getSession().getAttribute("userno");
 		
-		//주간일정
+		
+		// 주간일정
 		Date today = Util4calen.getToday();
 		calCalen(today, model);
 		
-		//네비게이션
+		// 네비게이션
 		Integer alertcount = etcSvc.selectAlertCount(userno);
 		model.addAttribute("alertcount", alertcount);
 		
-		//RecentNews, 공지사항, timeline
+		// RecentNews, 공지사항, timeline
 		List<BoardVO> listview = indexSvc.selectRecentNews();
 		List<BoardVO> noticeList = indexSvc.selectNoticeListTop5();
 		List<BoardReplyVO> listtime = indexSvc.selectTimeLine();
@@ -53,9 +54,7 @@ public class IndexController {
 	}
 	
 	
-    /**
-     * 메인페이지에서 이전, 다음주 이동시 Ajax.
-     */
+     // 메인페이지에서 이전, 다음주 이동시 Ajax
     @RequestMapping(value = "/moveDate")
     public String moveDate(HttpServletRequest request, Model model) {
         String date = request.getParameter("date");
@@ -67,9 +66,7 @@ public class IndexController {
         return "main/indexCalen";
     }
 	
-	/**
-	 * 일자표시.
-	 */
+	// 일자표시
 	private String calCalen(Date targetDay, Model model) {
         List<DateVO> calenList = new ArrayList<DateVO>();
         
@@ -82,7 +79,7 @@ public class IndexController {
         Date preWeek = Util4calen.dateAdd(fweek, -1);		//이전 주
         Date nextWeek = Util4calen.dateAdd(lweek, 1);		//다음 주
         
-        //오늘일자를 기준으로 일~월까지 한주를 calenList에 add
+        // 오늘일자를 기준으로 일~월까지 한주를 calenList에 add
         while (fweek.compareTo(lweek) <= 0) {
             DateVO dvo = Util4calen.date2VO(fweek);
             dvo.setIstoday(Util4calen.dateDiff(fweek, today) == 0);

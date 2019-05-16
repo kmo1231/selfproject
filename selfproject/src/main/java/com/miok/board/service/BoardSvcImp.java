@@ -31,17 +31,13 @@ public class BoardSvcImp implements BoardSvc{
 	static final Logger LOGGER = LoggerFactory.getLogger(BoardSvc.class);
 	
 	
-	/**
-	 * 게시판그룹 정보.
-	 */
+	// 게시판그룹 정보
 	@Override
 	public BoardGroupVO selectBoardGroupOne4Used(String bgno) {
 		return boardDAO.selectBoardGroupOne4Used(bgno);
 	}
 	
-	/**
-	 * 게시판 관련 메소드--------------------------------------------
-	 */
+	//===================================
 	
 	// 게시판 글 수
 	@Override
@@ -71,22 +67,26 @@ public class BoardSvcImp implements BoardSvc{
 		TransactionStatus status = txManager.getTransaction(def);
 		
 		try {
+			// 새글인지 글 수정 인지 확인
 			if(boardVO.getBrdno() == null || "".equals(boardVO.getBrdno())){
 				boardDAO.insertBoard(boardVO);
 			}else {
 				boardDAO.updateBoard(boardVO);
 			}
 			
+			// 체크박스에 선택 후 수정한 파일 삭제
 			if(fileno != null) {
 				HashMap<String, String[]> delFile = new HashMap<String, String[]>();
 				delFile.put("fileno", fileno);
 				boardDAO.deleteBoardFile(delFile);
 			}
 			
+			// 첨부한 파일 등록
 			for(FileVO fileVO : filelist) {
 				fileVO.setParentPK(boardVO.getBrdno());
 				boardDAO.insertBoardFile(fileVO);
 			}
+			
 			txManager.commit(status);
 		}catch (TransactionException e) {
 			txManager.rollback(status);
@@ -140,6 +140,7 @@ public class BoardSvcImp implements BoardSvc{
 		}
 	}
 	
+	// 파일목록 출력
 	@Override
 	public List<FileVO> selectBoardFileList(String brdno) {
 		return boardDAO.selectBoardFileList(brdno);
@@ -178,7 +179,6 @@ public class BoardSvcImp implements BoardSvc{
 				boardReplyVO.setReorder(reorder);
 			}
 			boardDAO.insertBoardReply(boardReplyVO);
-		
 		}else { 
 			//댓글 수정
 			boardDAO.updateBoardReply(boardReplyVO);

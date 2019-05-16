@@ -5,6 +5,7 @@
 
 	<c:url var="link" value="boardRead">
 		<c:param name="brdno" value="${listitem.brdno}" />
+		<c:param name="bgno" value="${listitem.bgno}"></c:param>
 	</c:url>		
 	<div class="listBody">
 		<div class="listHiddenField pull-left field60">

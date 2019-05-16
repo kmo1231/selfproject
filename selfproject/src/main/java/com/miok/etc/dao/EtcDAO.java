@@ -9,10 +9,13 @@ import com.miok.board.vo.BoardVO;
 
 @Repository
 public interface EtcDAO {
-
 	public Integer selectAlertCount(String userno);
+
 	public List<BoardVO> selectAlertList4Ajax(String param);
+
 	public List<BoardVO> selectAlertList(String param);
+
 	public Integer selectList4UserCount(BoardSearchVO boardSerchVO);
+
 	public List<?> selectList4User(BoardSearchVO boardSerchVO);
 }
