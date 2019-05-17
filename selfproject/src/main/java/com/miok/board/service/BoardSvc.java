@@ -8,7 +8,6 @@ import com.miok.board.vo.BoardSearchVO;
 import com.miok.board.vo.BoardVO;
 import com.miok.common.Field3VO;
 import com.miok.common.FileVO;
-import com.miok.common.SearchVO;
 
 public interface BoardSvc {
 	public BoardGroupVO selectBoardGroupOne4Used(String bgno);

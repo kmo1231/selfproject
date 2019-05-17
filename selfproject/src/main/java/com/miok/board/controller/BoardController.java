@@ -6,13 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.miok.adminboard.service.BoardGroupSvc;
 import com.miok.adminboard.vo.BoardGroupVO;
@@ -28,7 +29,7 @@ import com.miok.common.UtilEtc;
 import com.miok.etc.service.EtcSvc;
 
 @Controller
-public class boardController {
+public class BoardController {
 
 	@Autowired
 	private BoardSvc boardSvc;
@@ -39,15 +40,15 @@ public class boardController {
 	@Autowired
 	private EtcSvc etcSvc;
 	
-	static final Logger LOGGER = LoggerFactory.getLogger(boardController.class);
+	static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
 
 	// 글 목록
 	@RequestMapping(value = "/boardList")
-	public String boardList(HttpServletRequest request, BoardSearchVO boardSearchVO, Model model) {
+	public String boardList(HttpServletRequest request, BoardSearchVO searchVO, Model model) {
 		// 다국어지원을 위한 설정
-		String globalkeyword = request.getParameter("globalkeyword");
-		if(globalkeyword != null || !"".equals(globalkeyword)) {
-			boardSearchVO.setSearchKeyword(globalkeyword);
+		String globalKeyword = request.getParameter("globalKeyword");
+		if(globalKeyword != null & !"".equals(globalKeyword)) {
+			searchVO.setSearchKeyword(globalKeyword);
 		}
 		
 		// 사용자 정보 가져오기
@@ -58,27 +59,27 @@ public class boardController {
 		model.addAttribute("alertcount", alertcount);
 		
 		// 생성되지 않은 게시판일 경우
-		if(boardSearchVO.getBgno() != null && !"".equals(boardSearchVO.getBgno())) {
-			BoardGroupVO bgInfo = boardSvc.selectBoardGroupOne4Used(boardSearchVO.getBgno());
+		if(searchVO.getBgno() != null && !"".equals(searchVO.getBgno())) {
+			BoardGroupVO bgInfo = boardSvc.selectBoardGroupOne4Used(searchVO.getBgno());
 			if(bgInfo == null) {
 				return "board/BoardGroupFail";
 			}
 			model.addAttribute("bgInfo", bgInfo);
 		}
 		
-		List<BoardVO> noticelist = boardSvc.selectNoticeList(boardSearchVO);
+		List<BoardVO> noticelist = boardSvc.selectNoticeList(searchVO);
 		
 		// 페이지계산용
-		boardSearchVO.pageCalculate(boardSvc.selectBoardCount(boardSearchVO));
+		searchVO.pageCalculate(boardSvc.selectBoardCount(searchVO));
 		
-		List<BoardVO> listview = boardSvc.selectBoardList(boardSearchVO);
+		List<BoardVO> listview = boardSvc.selectBoardList(searchVO);
 		
 		model.addAttribute("listview", listview);
-		model.addAttribute("searchVO", boardSearchVO);
+		model.addAttribute("searchVO", searchVO);
 		model.addAttribute("noticelist", noticelist);
 		
 		// 전체리스트 출력
-		if(boardSearchVO.getBgno() == null || "".equals(boardSearchVO.getBgno())) {
+		if(searchVO.getBgno() == null || "".equals(searchVO.getBgno())) {
 			return "board/BoardListAll";
 		}
 		
