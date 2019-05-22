@@ -13,7 +13,7 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import com.miok.adminboard.vo.BoardGroupVO;
+import com.miok.admin.vo.BoardGroupVO;
 import com.miok.board.dao.BoardDAO;
 import com.miok.board.vo.BoardReplyVO;
 import com.miok.board.vo.BoardSearchVO;

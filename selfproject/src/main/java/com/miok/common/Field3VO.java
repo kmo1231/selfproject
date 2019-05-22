@@ -5,9 +5,7 @@ public class Field3VO {
     private String field2;
     private String field3;
     
-    /**
-     * 한번에 값 설정.     
-     */
+    // 한번에 값을 설정하기 위한 필드 VO     
     public Field3VO(String field1, String field2, String field3) {
         this.field1 = field1;
         this.field2 = field2;

@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FileDownload {
 
-    /**
-     * 파일(첨부파일, 이미지등) 다운로드.
-     */
-    @RequestMapping(value = "fileDownload")
+    // 파일(첨부파일, 이미지등) 다운로드
+    @RequestMapping(value = "/fileDownload")
     public void fileDownload(HttpServletRequest request,HttpServletResponse response) {
-        String path = "d:\\workspace\\fileupload\\"; 
+    	String path = LocaleMessage.getMessage("info.filePath") + "/"; 
         
         String filename = request.getParameter("filename");
         String downname = request.getParameter("downname");

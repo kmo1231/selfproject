@@ -1,12 +1,12 @@
-package com.miok.adminboard.service;
+package com.miok.admin.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.miok.adminboard.dao.BoardGroupDAO;
-import com.miok.adminboard.vo.BoardGroupVO;
+import com.miok.admin.dao.BoardGroupDAO;
+import com.miok.admin.vo.BoardGroupVO;
 
 @Service
 public class BoardGroupSvcImp implements BoardGroupSvc{
@@ -18,7 +18,7 @@ public class BoardGroupSvcImp implements BoardGroupSvc{
 		return boardGroupDAO.selectBoardGroupList();
 	}
 
-	//게시판 그룹 수정 및 생성
+	// 게시판 추가 및 수정
 	@Override
 	public void insertBoardGroup(BoardGroupVO bgVO) {
 		if("".equals(bgVO.getBgparent())){
@@ -36,11 +36,6 @@ public class BoardGroupSvcImp implements BoardGroupSvc{
 	@Override
 	public BoardGroupVO selectBoardGroupOne(String bgno) {
 		return boardGroupDAO.selectBoardGroupOne(bgno);
-	}
-
-	@Override
-	public BoardGroupVO selectBoardGroupOneUsed(String bgno) {
-		return boardGroupDAO.selectBoardGroupOneUsed(bgno);
 	}
 
 	@Override

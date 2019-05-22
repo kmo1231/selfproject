@@ -17,18 +17,9 @@ import com.miok.board.service.BoardSvc;
 public class LoginInterceptor implements HandlerInterceptor {
     static final Logger LOGGER = LoggerFactory.getLogger(BoardSvc.class);
 
-    /**
-     * Controller 실행 요청전.
-     * 일반 사용자의 로그인 체크. 
-     */
+    // 일반 사용자의 로그인 체크 (Controller 실행 요청 전) 
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) {
         HttpSession session = req.getSession();
-        /*
-        session.setAttribute("userid", "admin");
-        session.setAttribute("userrole", "A");        
-        session.setAttribute("userno",   "1");        
-        session.setAttribute("usernm", "관리자");
-       */
         
         try {
             if (session == null || session.getAttribute("userno") == null) {

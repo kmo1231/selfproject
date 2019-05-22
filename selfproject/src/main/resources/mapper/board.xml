@@ -3,7 +3,7 @@
 
 <mapper namespace="com.miok.board.dao.BoardDAO">
 
-    <select id="selectBoardGroupOne4Used" parameterType="String" resultType="com.miok.adminboard.vo.BoardGroupVO">
+    <select id="selectBoardGroupOne4Used" parameterType="String" resultType="com.miok.admin.vo.BoardGroupVO">
         SELECT BGNO, BGNAME, BGUSED, BGREPLY, BGREADONLY, BGNOTICE
           FROM TBL_BOARDGROUP
          WHERE BGDELETEFLAG='N' AND BGNO=#{bgno} AND BGUSED='Y'

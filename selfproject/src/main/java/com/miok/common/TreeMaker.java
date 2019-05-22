@@ -8,9 +8,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class TreeMaker {
 
-    /**
-     * Data Ltst(TreeVO) > Tree Data(Json).
-     */
+    // Data List(TreeVO) > Tree Data(Json).
     public String makeTreeByHierarchy(List<?> listview) {
         List<TreeVO> rootlist = new ArrayList<TreeVO>();
         

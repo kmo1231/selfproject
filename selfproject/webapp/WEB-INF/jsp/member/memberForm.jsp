@@ -25,11 +25,11 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script src="css/sb-admin/bootstrap.min.js"></script>
     <script src="css/sb-admin/metisMenu.min.js"></script>
     <script src="css/sb-admin/sb-admin-2.js"></script>
-	<script src="js/project9.js"></script>    
+	<script src="js/selfproject.js"></script>    
 <script>
 
 $(function(){

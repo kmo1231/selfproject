@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.miok.adminboard.vo.BoardGroupVO;
+import com.miok.admin.vo.BoardGroupVO;
 import com.miok.board.vo.BoardReplyVO;
 import com.miok.board.vo.BoardSearchVO;
 import com.miok.board.vo.BoardVO;

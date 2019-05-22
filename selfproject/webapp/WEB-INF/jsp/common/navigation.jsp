@@ -102,10 +102,7 @@
 		                            <a href="sample4">샘플 4: List & Excel</a>
                                 </li>
                                 <li>
-		                            <a href="crudList">샘플 5: CRUD</a>
-                                </li>
-                                <li>
-		                            <a href="chkList">샘플 6: Multy Checkbox</a>
+		                            <a href="sample5">샘플 5: Multi Checkbox</a>
                                 </li>
 	                        </ul>                            
                         </li>
@@ -127,9 +124,6 @@
 	                                </li>
 	                            </ul>
 	                        </li>
-                             <li>
-                                 <a href="adCodeList"><i class="fa fa-gear fa-fw"></i> <s:message code="memu.code"/></a>
-                             </li>
 	                	</c:if>	        
                     </ul>
                 </div>

@@ -33,7 +33,7 @@ public class LoginController {
 	}
 	
 	// 로그인 처리
-	@RequestMapping(value = "memberLoginChk")
+	@RequestMapping(value = "/memberLoginChk")
 	public String memberLoginChk(HttpServletRequest request, HttpServletResponse response, LoginVO loginInfo, Model model) {
 		
 		// id, pw 확인
@@ -66,7 +66,7 @@ public class LoginController {
 	}
 	
 	// 로그아웃 처리
-	@RequestMapping(value = "memberLogout")
+	@RequestMapping(value = "/memberLogout")
 	public String memberLogout(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
@@ -86,7 +86,7 @@ public class LoginController {
 	}
 	
 	// 사용자가 관리자페이지 접근 시 오류페이지 출력.
-	@RequestMapping(value = "noAuthMessage")
+	@RequestMapping(value = "/noAuthMessage")
 	public String noAuthMessage() {
 		return "common/noAuth";
 	}

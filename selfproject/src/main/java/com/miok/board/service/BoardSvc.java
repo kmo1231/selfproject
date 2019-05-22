@@ -2,7 +2,7 @@ package com.miok.board.service;
 
 import java.util.List;
 
-import com.miok.adminboard.vo.BoardGroupVO;
+import com.miok.admin.vo.BoardGroupVO;
 import com.miok.board.vo.BoardReplyVO;
 import com.miok.board.vo.BoardSearchVO;
 import com.miok.board.vo.BoardVO;

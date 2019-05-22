@@ -37,7 +37,7 @@ public class IndexController {
 		Date today = Util4calen.getToday();
 		calCalen(today, model);
 		
-		// 네비게이션
+		// 알림개수
 		Integer alertcount = etcSvc.selectAlertCount(userno);
 		model.addAttribute("alertcount", alertcount);
 		
@@ -54,7 +54,7 @@ public class IndexController {
 	}
 	
 	
-     // 메인페이지에서 이전, 다음주 이동시 Ajax
+    // 메인페이지에서 이전, 다음주 이동시 Ajax
     @RequestMapping(value = "/moveDate")
     public String moveDate(HttpServletRequest request, Model model) {
         String date = request.getParameter("date");

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.miok.adminboard.service.BoardGroupSvc;
-import com.miok.adminboard.vo.BoardGroupVO;
+import com.miok.admin.service.BoardGroupSvc;
+import com.miok.admin.vo.BoardGroupVO;
 import com.miok.board.service.BoardSvc;
 import com.miok.board.vo.BoardReplyVO;
 import com.miok.board.vo.BoardSearchVO;
@@ -163,7 +163,7 @@ public class BoardController {
    		return "redirect:/boardList?bgno="+boardInfo.getBgno();
     }
 	
-	// 글읽기
+	// 글조회
 	@RequestMapping(value = "/boardRead")
 	public String boardRead(HttpServletRequest request, Model model) {
 		String userno = (String)request.getSession().getAttribute("userno");
@@ -205,6 +205,7 @@ public class BoardController {
 		String brdno = request.getParameter("brdno");
 		String bgno = request.getParameter("bgno");
 		
+		// 글 삭제 권한 확인
 		BoardVO boardInfo = new BoardVO();
 		boardInfo.setBrdno(brdno);
 		boardInfo.setUserno(userno);

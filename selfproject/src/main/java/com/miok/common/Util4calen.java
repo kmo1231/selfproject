@@ -12,35 +12,27 @@ public class Util4calen {
     static final Logger LOGGER = LoggerFactory.getLogger(AdminInterceptor.class);
     static final String[] dayArr = {"일", "월", "화", "수", "목", "금", "토"};
     
-    /**
-     * 시스템의 오늘 일자 반환. 
-     */
+    // 시스템의 오늘 일자 반환. 
     public static Date getToday() {
         Calendar cal = Calendar.getInstance(); 
         cal.setTime( new Date() );
         return cal.getTime();
     }    
 
-    /**
-     * 문자열을 날짜형으로 변환.
-     */
+    // 문자열을 날짜형으로 변환
     public static Date getToday(String date) {
         Calendar cal = Calendar.getInstance(); 
         cal.setTime( str2Date(date) );
         return cal.getTime();
     }   
     
-    /**
-     *  날짜를 문자열로 변환.
-     */
+    // 날짜를 문자열로 변환
     public static String date2Str(Date date) {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         return ft.format( date.getTime() );    
     }
     
-    /**
-     *  문자열을 날짜(yyyy-MM-dd)로 변환.
-     */
+     // 문자열을 날짜(yyyy-MM-dd)로 변환
     public static Date str2Date(String date) {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         Date ret = null;
@@ -52,9 +44,7 @@ public class Util4calen {
         return ret ;
     }
     
-    /**
-     *  날짜를 년월일로 구분하여 저장.
-     */
+    // 날짜를 년월일로 구분하여 저장
     public static DateVO date2VO(Date date) {
         Calendar cal = Calendar.getInstance(); 
         cal.setTime(date);
@@ -67,9 +57,7 @@ public class Util4calen {
         return dvo;
     }
     
-    /**
-     * 년도 추출.
-     */
+    // 년도 추출
     public static Integer getYear(Date date) {
         Calendar cal = Calendar.getInstance(); 
         cal.setTime( date );
@@ -77,9 +65,7 @@ public class Util4calen {
         return cal.get(Calendar.YEAR);
     }
     
-    /**
-     * 월 추출.
-     */
+    // 월 추출
     public static Integer getMonth(Date date) {
         Calendar cal = Calendar.getInstance(); 
         cal.setTime( date );
@@ -87,20 +73,14 @@ public class Util4calen {
         return cal.get(Calendar.MONTH) + 1;
     }
 
-    /**
-     * 한 주의 순서 (요일).
-     * 예: 일요일 = 0
-     */
+    // 한 주의 순서 (요일) ex: 일요일 = 0
     public static Integer getDayOfWeek(Date date) {
         Calendar cal = Calendar.getInstance(); 
         cal.setTime(date);
         return cal.get(Calendar.DAY_OF_WEEK)-1;    
     }
     
-    /**
-     * 월의 몇 번째 주 인지 추출.
-     * 예: 반환값이 4이면 (7월) 4번째 주
-     */
+    // 월의 몇 번째 주 인지 추출  ex: 반환값이 4이면 (7월) 4번째 주
     public static Integer getWeekOfMonth(Date date) {
         Calendar cal = Calendar.getInstance(); 
         cal.setTime(date);
@@ -111,10 +91,7 @@ public class Util4calen {
         return dayArr[idx];    
     }
     
-    /**
-     *  한주의 시작일자.
-     */
-    
+    // 한주의 시작일자
     public static Date getFirstOfWeek(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -123,9 +100,7 @@ public class Util4calen {
         return cal.getTime();
     }
     
-    /**
-     *  한주의 종료일자.
-     */
+    // 한주의 종료일자
     public static Date getLastOfWeek(Date date) {               
         Calendar cal = Calendar.getInstance();
         cal.setTime( date );
@@ -134,9 +109,7 @@ public class Util4calen {
         return cal.getTime();    
     }
 
-    /**
-     *  월의 시작일.
-     */
+    // 월의 시작일
     public static Date getFirstOfMonth() {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         
@@ -145,9 +118,7 @@ public class Util4calen {
         return str2Date(str.substring(0, 8)+"01");
     }
 
-    /**  
-     * 두 날짜(date1,date2)의 일수: 시간 포함해서 계산하면 오류가 있어 날짜만 추출해서 계산.
-     */
+    // 두 날짜(date1,date2)의 일수: 시간 포함해서 계산하면 오류가 있어 날짜만 추출해서 계산
     public static Integer dateDiff(Date date1, Date date2) {
         String dt1 = date2Str(date1);
         String dt2 = date2Str(date2);
@@ -156,9 +127,7 @@ public class Util4calen {
         return day;
     }
 
-    /** 
-     * 날짜 계산: -1은 감소.
-     */
+    //  날짜 계산: -1은 감소
     public static Date dateAdd(Date date, Integer calDay) {
         Calendar cal = Calendar.getInstance(); 
         cal.setTime(date);
@@ -167,9 +136,7 @@ public class Util4calen {
         return cal.getTime();
     }    
     
-    /** 
-     * 달 계산: -1은 감소.
-     */
+    // 달 계산: -1은 감소.
     public static Date monthAdd(Date date, Integer month) { 
         Calendar cal = Calendar.getInstance(); 
         cal.setTime(date);
