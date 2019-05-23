@@ -22,7 +22,7 @@ public class MemberSvcImp implements MemberSvc{
 	}
 
 	@Override
-	public List<?> selectSearchMemberList(SearchVO searchVO) {
+	public List<UserVO> selectSearchMemberList(SearchVO searchVO) {
 		return memberDAO.selectSearchMemberList(searchVO);
 	}
 

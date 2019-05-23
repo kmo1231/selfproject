@@ -222,7 +222,7 @@ public class BoardController {
 	//=====================================
 	
 	// 좋아요 저장
-	@RequestMapping(value = "/addBoardLike")
+	@RequestMapping(value = "/boardLike")
 	public void addBoardLike(HttpServletRequest request, HttpServletResponse response) {
 		String userno = (String)request.getSession().getAttribute("userno");
 		String brdno = request.getParameter("brdno");

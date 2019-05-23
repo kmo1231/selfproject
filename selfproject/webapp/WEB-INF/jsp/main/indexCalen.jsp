@@ -15,7 +15,6 @@
                  <div class="panel <c:if test="${calenList.istoday}">panel-green</c:if> <c:if test="${!calenList.istoday}">panel-default</c:if> height100">
                      <div class="panel-heading"><c:out value="${calenList.month}"/>월 <c:out value="${calenList.day}"/>일 (<c:out value="${calenList.week}"/>)</div>
                      <div class="panel-body">
-                     	일정을 입력해주세요.
                      </div>
                  </div>
              </div>

@@ -16,7 +16,9 @@
          INNER JOIN COM_DEPT CD ON CD.DEPTNO=CU.DEPTNO
          WHERE CU.DELETEFLAG='N' AND CD.DELETEFLAG='N'
            AND CU.USERNM LIKE CONCAT('%', #{searchKeyword},'%')
-         LIMIT ${rowStart-1}, 10
+           <if test="rowStart != null">
+         	 LIMIT ${rowStart-1}, 10
+           </if>
     </select> 
 
     <select id="selectMember4Login" parameterType="com.miok.member.vo.LoginVO" resultType="com.miok.member.vo.UserVO" >

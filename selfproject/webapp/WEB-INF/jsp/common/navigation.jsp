@@ -96,7 +96,7 @@
 		                            <a href="sample2">샘플 2: 날짜 선택 </a>
                                 </li>
                                 <li>
-		                            <a href="sample3">샘플 3: 챠트</a>
+		                            <a href="sample3">샘플 3: 차트</a>
                                 </li>
                                 <li>
 		                            <a href="sample4">샘플 4: List & Excel</a>

@@ -155,35 +155,33 @@ public class BoardSvcImp implements BoardSvc{
 	
 	// 댓글 저장
 	@Override
-	public BoardReplyVO insertBoardReply(BoardReplyVO boardReplyVO) {
+	public BoardReplyVO insertBoardReply(BoardReplyVO param) {
 		// 댓글 추가
-		if(boardReplyVO.getReno() == null || "".equals(boardReplyVO.getReno())) {
+		if (param.getReno() == null || "".equals(param.getReno())) {
 			// 자식 댓글일 경우 (다른 댓글 아래에 추가한 댓글)
-			if(boardReplyVO.getReparent() != null) {
-				// 부모 댓글 정보
-				BoardReplyVO replyVO = boardDAO.selectBoardReplyParent(boardReplyVO.getReparent());
+			if (param.getReparent() != null) {
+				// 부모 마지막 순서 자식 댓글 정보
+				BoardReplyVO replyInfo = boardDAO.selectBoardReplyParent(param.getReparent());
 				
 				// depth 설정
-				boardReplyVO.setRedepth(replyVO.getRedepth());
+				param.setRedepth(replyInfo.getRedepth());
 				
 				// 자식댓글 정렬 오름차순을 위한 reorder설정
-				Integer reorder = replyVO.getReorder()+boardDAO.selectBoardReplyChild(boardReplyVO.getReparent()) + 1;
-				boardReplyVO.setReorder(reorder);
+				param.setReorder(replyInfo.getReorder() + 1);
 				
 				// insert하는 boardReplyVO이후의 댓글은 reorder를 전부 1증가
-				replyVO.setReorder(reorder-1);
-				boardDAO.updateBoardReplyOrder(replyVO);
+				boardDAO.updateBoardReplyOrder(replyInfo);
 			} else {
 				// 부모 댓글일 경우 (1단계)
-				Integer reorder = boardDAO.selectBoardReplyMaxOrder(boardReplyVO.getBrdno());
-				boardReplyVO.setReorder(reorder);
+				Integer reorder = boardDAO.selectBoardReplyMaxOrder(param.getBrdno());
+				param.setReorder(reorder);
 			}
-			boardDAO.insertBoardReply(boardReplyVO);
+			boardDAO.insertBoardReply(param);
 		}else { 
 			//댓글 수정
-			boardDAO.updateBoardReply(boardReplyVO);
+			boardDAO.updateBoardReply(param);
 		}
-		return boardDAO.selectBoardReplyOne(boardReplyVO.getReno());
+		return boardDAO.selectBoardReplyOne(param.getReno());
 	}
 	
 	// 댓글 수정 & 삭제 권한

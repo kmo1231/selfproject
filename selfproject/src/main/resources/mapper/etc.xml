@@ -43,9 +43,9 @@
                    AND TBL.BLDATE > IF(TB.BRDDATE>IFNULL(TBR.READDATE,0), TB.BRDDATE, TBR.READDATE)
                 UNION ALL
                 SELECT BRDNO, RENO, BRDDATE, USERNO
-                     , IF((SELECT TBRE.BRDNO FROM TBL_BOARDREPLY TBRE WHERE TBRE.BRDNO=DS.BRDNO    AND TBRE.USERNO=#{userno}) IS NULL, 'files-o', 'comments') TYPE
+                     , IF((SELECT TBRE.BRDNO FROM TBL_BOARDREPLY TBRE WHERE TBRE.BRDNO=DS1.BRDNO AND TBRE.USERNO=#{userno}) IS NULL, 'files-o', 'comments') TYPE
                   FROM (
-                        SELECT TB.BRDNO, TBRE.RENO, TBRE.REDATE BRDDATE, TBRE.USERNO
+                        SELECT DISTINCT TB.BRDNO, TBRE.RENO, TBRE.REDATE BRDDATE, TBRE.USERNO
                           FROM TBL_BOARD TB
                           LEFT OUTER JOIN TBL_BOARDREAD TBR ON TBR.BRDNO=TB.BRDNO AND TBR.USERNO=#{userno}
                          INNER JOIN TBL_BOARDREPLY TBRE ON TBRE.BRDNO=TB.BRDNO
@@ -58,7 +58,7 @@
                          INNER JOIN TBL_BOARDREPLY TBRE ON TBRE.BRDNO=TBR.BRDNO
                          WHERE TBR.REDELETEFLAG='N' AND TBR.USERNO=#{userno} AND TBRR.USERNO=#{userno}  AND TBRE.USERNO!=#{userno}
                            AND TBRE.REDATE > TBRR.READDATE 
-                ) DS
+                       ) DS1
                  ORDER BY BRDDATE DESC
                  LIMIT 5
         ) DS 

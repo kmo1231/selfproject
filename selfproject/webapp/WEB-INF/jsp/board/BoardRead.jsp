@@ -24,7 +24,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/jquery-2.2.3.min.js"></script>
     <script src="css/sb-admin/bootstrap.min.js"></script>
     <script src="css/sb-admin/metisMenu.min.js"></script>
     <script src="css/sb-admin/sb-admin-2.js"></script>
@@ -168,9 +168,9 @@ function fn_replyReplySave(){
 	})	
 }
 
-function fn_addBoardLike(brdno){
+function fn_boardLike(brdno){
 	$.ajax({
-		url: "addBoardLike",
+		url: "boardLike",
 		type:"post", 
 		data : {brdno: brdno},
 		success: function(result){
@@ -228,7 +228,7 @@ function fn_addBoardLike(brdno){
 				</c:if>
 				
 				<c:if test="${boardInfo.brdlikechk == null}" >
-	                <button id="boardLikeBtn" class="btn btn-outline btn-primary pull-right" onclick="fn_addBoardLike(<c:out value="${boardInfo.brdno}"/>)" ><i class="fa fa-thumbs-o-up fa-fw"></i> <s:message code="common.like"/></button>
+	                <button id="boardLikeBtn" class="btn btn-outline btn-primary pull-right" onclick="fn_boardLike(<c:out value="${boardInfo.brdno}"/>)" ><i class="fa fa-thumbs-o-up fa-fw"></i> <s:message code="common.like"/></button>
 				</c:if>
 							                               
 				<p>&nbsp;</p>
